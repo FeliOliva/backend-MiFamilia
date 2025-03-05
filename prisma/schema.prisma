@@ -85,25 +85,6 @@ model Usuario {
   caja          Caja?    @relation(fields: [cajaId], references: [id])
 }
 
-model Rubro {
-  id            Int        @id @default(autoincrement())
-  nombre        String
-  fechaCreacion DateTime   @default(now())
-  estado        Int        @default(1)
-  subRubros     SubRubro[]
-  productos     Producto[]
-}
-
-model SubRubro {
-  id            Int        @id @default(autoincrement())
-  nombre        String
-  fechaCreacion DateTime   @default(now())
-  estado        Int        @default(1)
-  rubroId       Int
-  rubro         Rubro      @relation(fields: [rubroId], references: [id])
-  productos     Producto[]
-}
-
 model Producto {
   id            Int            @id @default(autoincrement())
   nombre        String
@@ -111,11 +92,7 @@ model Producto {
   precioInicial Int?
   fechaCreacion DateTime       @default(now())
   estado        Int            @default(1)
-  rubroId       Int
-  subRubroId    Int
   tipoUnidadId  Int?
-  rubro         Rubro          @relation(fields: [rubroId], references: [id])
-  subRubro      SubRubro       @relation(fields: [subRubroId], references: [id])
   tipoUnidad    TipoUnidad?    @relation(fields: [tipoUnidadId], references: [id])
   detalleVentas DetalleVenta[]
   precioLogs    PrecioLog[]

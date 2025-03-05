@@ -51,7 +51,7 @@ const getProductById = async (req, res) => {
 }
 const addProduct = async (req, res) => {
     try {
-        const { nombre, precio, precioInicial, rubroId, subRubroId, tipoUnidadId, rol_usuario } = req.body
+        const { nombre, precio, precioInicial, tipoUnidadId, rol_usuario } = req.body
         if (rol_usuario !== 0) {
             return res.status(401).json({ error: "No tiene permiso para realizar esta accion" })
         }
@@ -62,7 +62,7 @@ const addProduct = async (req, res) => {
         if (keys.length > 0) {
             await redisClient.del(keys);
         }
-        const newProduct = await productsModel.addProduct({ nombre: nombre.toUpperCase(), precio, precioInicial, rubroId, subRubroId, tipoUnidadId })
+        const newProduct = await productsModel.addProduct({ nombre: nombre.toUpperCase(), precio, precioInicial, tipoUnidadId })
         res.json(newProduct)
     } catch (error) {
         console.error("Error al agregar el producto", error);
@@ -72,7 +72,7 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, precio, rubroId, subRubroId, tipoUnidadId } = req.body;
+        const { nombre, precio, tipoUnidadId } = req.body;
         if (!id) {
             return res.status(400).json({ error: "El id es obligatorio" })
         }
@@ -87,7 +87,7 @@ const updateProduct = async (req, res) => {
             const precioAntiguo = product.precio;
             await productsModel.updatePrecio(id, { precioAntiguo, precioNuevo: precio });
         }
-        const updatedProduct = await productsModel.updateProduct(id, { nombre: nombre.toUpperCase(), precio, rubroId, subRubroId, tipoUnidadId });
+        const updatedProduct = await productsModel.updateProduct(id, { nombre: nombre.toUpperCase(), precio, tipoUnidadId });
         res.json(updatedProduct);
     } catch (error) {
         console.error("Error al actualizar el producto:", error);
