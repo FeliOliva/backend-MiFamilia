@@ -36,7 +36,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/", (req, res) => {
+app.get("/backend", (req, res) => {
     res.send("Servidor funcionando correctamente");
 });
 
