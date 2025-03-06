@@ -36,6 +36,9 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get("/", (req, res) => {
+    res.send("Servidor funcionando correctamente");
+});
 
 // Ruta de login para generar un token
 app.post("/login", async (req, res) => {
