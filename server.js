@@ -41,7 +41,7 @@ app.get("/backend", (req, res) => {
 });
 
 // Ruta de login para generar un token
-app.post("/login", async (req, res) => {
+app.post("/backend/login", async (req, res) => {
     const { usuario, password } = req.body;  // <-- Asegúrate de que los nombres coincidan con Postman
     if (!usuario || !password) {
         return res.status(400).json({ error: "Faltan datos en la solicitud" });
