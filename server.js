@@ -64,9 +64,6 @@ app.post("/backend/login", async (req, res) => {
     }
 });
 
-app.get("/api/test", (req, res) => {
-    res.send("Testeando ruta de clientes");
-});
 app.use("/api", verifyToken, clientsRoutes, negociosRoutes, productsRoutes, ventaRoutes, precioLogRoutes, entregaRoutes, notasCreditoRoutes, tiposUnidadesRoutes, chequesRoutes);
 
 
