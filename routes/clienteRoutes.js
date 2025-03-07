@@ -3,9 +3,6 @@ const router = express.Router();
 const clientControllers = require("../controllers/clientControllers");
 const { verifyToken } = require("../auth");
 
-router.get("/cliente/test", (req, res) => {
-    res.send("Testeando ruta de clientes");
-});
 router.get("/clientes", verifyToken, clientControllers.getClients);
 router.get("/clientes/:id", verifyToken, clientControllers.getClientById);
 router.post("/clientes", verifyToken, clientControllers.addClient);
